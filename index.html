@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ID Card Generator</title>
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+
+    <!-- QRCode & html2canvas -->
+    <script src="https://cdn.jsdelivr.net/npm/qrcode@1.5.1/build/qrcode.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+
+    <!-- Our CSS -->
+    <link rel="stylesheet" href="style.css" />
+</head>
+
+<body>
+    <!-- ==================== HEADER ==================== -->
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <i class="fas fa-id-card"></i>
+                    <h1>ID_Generator</h1>
+                </div>
+
+                <button class="mobile-menu-btn" aria-label="Toggle menu">
+                    <i class="fas fa-bars"></i>
+                </button>
+
+                <nav>
+                    <ul class="nav-menu">
+                        <li><a href="#" class="nav-link active" data-section="home">Home</a></li>
+                        <li><a href="#" class="nav-link" data-section="generate">Generate ID</a></li>
+                        <li><a href="#" class="nav-link" data-section="services">Services</a></li>
+                        <li><a href="#" class="nav-link" data-section="contact">Contact Us</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <!-- ==================== HERO ==================== -->
+    <section class="hero">
+        <div class="container">
+            <h2>Professional ID Card Solutions</h2>
+            <p>Create stunning, secure, and professional ID cards for your organization with our easy-to-use platform
+            </p>
+            <a href="#" class="btn" id="generateBtn">Generate Now</a>
+        </div>
+    </section>
+
+    <!-- ==================== MAIN CONTENT ==================== -->
+    <main class="container">
+
+        <!-- ==== HOME ==== -->
+        <section id="home" class="active">
+            <div class="section-title">
+                <h2>Why Choose Our ID Card Generator?</h2>
+                <p>We provide the most comprehensive ID card solutions for businesses, schools, and organizations</p>
+            </div>
+
+            <div class="features">
+                <div class="feature-card">
+                    <i class="fas fa-bolt"></i>
+                    <h3>Quick & Easy</h3>
+                    <p>Create professional ID cards in minutes with our intuitive interface</p>
+                </div>
+
+                <div class="feature-card">
+                    <i class="fas fa-shield-alt"></i>
+                    <h3>Secure & Reliable</h3>
+                    <p>Advanced security features to protect your organization's identity</p>
+                </div>
+
+                <div class="feature-card">
+                    <i class="fas fa-palette"></i>
+                    <h3>Fully Customizable</h3>
+                    <p>Design ID cards that match your organization's brand and style</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- ==== GENERATE ID ==== -->
+        <section id="generate">
+            <div class="section-title">
+                <h2>Create Your ID Card</h2>
+                <p>Fill in the details below to generate your ID card</p>
+            </div>
+
+            <div class="form-section">
+
+                <!-- Size selector -->
+                <div class="size-controls">
+                    <div class="size-option active" data-size="standard">Standard</div>
+                    <div class="size-option" data-size="small">Small</div>
+                    <div class="size-option" data-size="large">Large</div>
+                </div>
+
+                <div class="form-container">
+                    <!-- LEFT COLUMN – PHOTO + BASIC INFO -->
+                    <div class="form-column">
+                        <div class="photo-upload">
+                            <div class="photo-preview">
+                                <i class="fas fa-user fa-3x" id="defaultIcon"></i>
+                                <img id="previewImage" alt="Profile Photo" style="display:none;">
+                            </div>
+                            <label for="fileInput" class="upload-btn">
+                                <i class="fas fa-upload"></i> Upload Photo
+                            </label>
+                            <input type="file" id="fileInput" accept="image/*">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="fullName">Full Name</label>
+                            <input type="text" id="fullName" placeholder="Enter full name">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="idNumber">ID Number</label>
+                            <input type="text" id="idNumber" placeholder="Enter ID number">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="dob">Date of Birth</label>
+                            <input type="date" id="dob">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="bloodGroup">Blood Group</label>
+                            <select id="bloodGroup">
+                                <option value="">Select Blood Group</option>
+                                <option value="A+">A+</option>
+                                <option value="A-">A-</option>
+                                <option value="B+">B+</option>
+                                <option value="B-">B-</option>
+                                <option value="AB+">AB+</option>
+                                <option value="AB-">AB-</option>
+                                <option value="O+">O+</option>
+                                <option value="O-">O-</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <!-- MIDDLE COLUMN – INSTITUTE INFO -->
+                    <div class="form-column">
+                        <div class="form-group">
+                            <label for="institute">Institute Name</label>
+                            <input type="text" id="institute" placeholder="Enter institute name">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="instituteAddress">Institute Address</label>
+                            <textarea id="instituteAddress" rows="2" placeholder="Enter institute address"></textarea>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="course">Course/Department</label>
+                            <input type="text" id="course" placeholder="Enter course/department">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="validity">Validity</label>
+                            <input type="date" id="validity">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="address">Address</label>
+                            <textarea id="address" rows="2" placeholder="Enter your address"></textarea>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="phone">Phone Number</label>
+                            <input type="tel" id="phone" placeholder="Enter phone number">
+                        </div>
+                    </div>
+
+                    <!-- RIGHT COLUMN – PREVIEW -->
+                    <div class="preview-column">
+                        <div class="id-card standard">
+                            <div class="id-card-header">
+                                <h2 id="previewInstitute">Institute Name</h2>
+                                <p>Identity Card</p>
+                            </div>
+
+                            <div class="id-card-address" id="previewInstituteAddress">INSTITUTE ADDRESS</div>
+
+                            <div class="id-card-photo">
+                                <img id="cardPhoto" src="" alt="Profile Photo" style="display:none;">
+                                <i class="fas fa-user fa-2x" id="cardIcon"></i>
+                            </div>
+
+                            <div class="id-card-details">
+                                <h3 id="previewName">Full Name</h3>
+                                <p><strong>ID:</strong> <span id="previewId">N/A</span></p>
+                                <p><strong>DOB:</strong> <span id="previewDob">N/A</span></p>
+                            </div>
+
+                            <div class="id-card-info">
+                                <div>
+                                    <p><strong>Course:</strong> <span id="previewCourse">N/A</span></p>
+                                    <p><strong>Phone:</strong> <span id="previewPhone">N/A</span></p>
+                                </div>
+                                <div>
+                                    <p><strong>Blood Group:</strong> <span id="previewBlood">N/A</span></p>
+                                    <p><strong>Address:</strong> <span id="previewAddress">N/A</span></p>
+                                </div>
+                            </div>
+
+                            <div class="id-card-footer">
+                                <div class="id-card-signature">
+                                    <p>Authorized Signature</p>
+                                    <p>Valid thru: <span id="previewValidity">N/A</span></p>
+                                </div>
+                                <div class="id-card-qr" id="qrCode"></div>
+                            </div>
+                        </div>
+
+                        <div class="action-buttons">
+                            <button class="action-btn download-btn" id="downloadBtn">
+                                <i class="fas fa-download"></i> Download ID
+                            </button>
+                            <button class="action-btn reset-btn" id="resetBtn">
+                                <i class="fas fa-redo"></i> Reset Form
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ==== SERVICES ==== -->
+        <section id="services">
+            <div class="section-title">
+                <h2>Our Services</h2>
+                <p>Comprehensive ID card solutions for every need</p>
+            </div>
+
+            <div class="services-grid">
+                <!-- Service cards (unchanged) -->
+                <div class="service-card">
+                    <div class="service-image">
+                        <img src="https://static.vecteezy.com/system/resources/thumbnails/008/172/045/small_2x/business-candle-stick-graph-chart-of-stock-market-investment-trading-on-white-background-design-bullish-point-trend-of-graph-illustration-vector.jpg"
+                            alt="Business ID Cards">
+                    </div>
+                    <div class="service-content">
+                        <h3>Business ID Cards</h3>
+                        <p>Professional identification cards for corporate environments with advanced security features.
+                        </p>
+                        <ul>
+                            <li><i class="fas fa-check"></i> Custom design</li>
+                            <li><i class="fas fa-check"></i> Access control integration</li>
+                            <li><i class="fas fa-check"></i> High-security elements</li>
+                            <li><i class="fas fa-check"></i> Bulk generation</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="service-card">
+                    <div class="service-image">
+                        <img src="https://static.vecteezy.com/system/resources/thumbnails/003/249/455/small_2x/teacher-s-day-cartoon-background-free-vector.jpg"
+                            alt="Educational ID Cards">
+                    </div>
+                    <div class="service-content">
+                        <h3>Educational ID Cards</h3>
+                        <p>ID solutions for schools, colleges, and universities with features tailored for educational
+                            institutions.</p>
+                        <ul>
+                            <li><i class="fas fa-check"></i> Student management integration</li>
+                            <li><i class="fas fa-check"></i> Library access features</li>
+                            <li><i class="fas fa-check"></i> Meal plan options</li>
+                            <li><i class="fas fa-check"></i> Event access control</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="service-card">
+                    <div class="service-image">
+                        <img src="https://png.pngtree.com/background/20210711/original/pngtree-opening-event-poster-background-picture-image_1097803.jpg"
+                            alt="Event ID Cards">
+                    </div>
+                    <div class="service-content">
+                        <h3>Event ID Cards</h3>
+                        <p>Temporary identification for conferences, trade shows, and special events with quick
+                            turnaround.</p>
+                        <ul>
+                            <li><i class="fas fa-check"></i> Fast production</li>
+                            <li><i class="fas fa-check"></i> Customizable for events</li>
+                            <li><i class="fas fa-check"></i> Different access levels</li>
+                            <li><i class="fas fa-check"></i> On-site printing support</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ==== CONTACT ==== -->
+        <section id="contact">
+            <div class="section-title">
+                <h2>Contact Us</h2>
+                <p>Get in touch for inquiries and support</p>
+            </div>
+
+            <div class="contact-container">
+                <div class="contact-info">
+                    <h3>Get In Touch</h3>
+                    <div class="contact-details">
+                        <div class="contact-detail">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <div>
+                                <h4>Address</h4>
+                                <p>Anshuman Verma<br>Ballia, Uttar Pradesh - 277001</p>
+                            </div>
+                        </div>
+
+                        <!-- <div class="contact-detail">
+                            <i class="fas fa-phone"></i>
+                            <div>
+                                <h4>Phone</h4>
+                                <p>+91 8924943256</p>
+                            </div>
+                        </div> -->
+
+                        <div class="contact-detail">
+                            <i class="fas fa-envelope"></i>
+                            <div>
+                                <h4>Email</h4>
+                                <p>anshumanverma9795@gmail.com</p>
+                            </div>
+                        </div>
+
+                        <div class="contact-detail">
+                            <i class="fas fa-clock"></i>
+                            <div>
+                                <h4>Business Hours</h4>
+                                <p>Monday-Friday: 9am-5pm <br>Saturday: 10am-2pm </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="contact-form">
+                    <h3>Send Us a Message</h3>
+                    <!-- ==== FORMSPREE ==== -->
+                    <form id="contactForm" action="https://formspree.io/f/mpwogbel" method="POST">
+                        <div class="form-group">
+                            <label for="name">Your Name</label>
+                            <input type="text" name="name" id="name" placeholder="Enter your name" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="email">Your Email</label>
+                            <input type="email" name="email" id="email" placeholder="Enter your email" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="subject">Subject</label>
+                            <input type="text" name="subject" id="subject" placeholder="Enter subject" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="message">Your Message</label>
+                            <textarea name="message" id="message" rows="4" placeholder="Enter your message"
+                                required></textarea>
+                        </div>
+                        <br>
+                        <button type="submit" class="btn">Send Message</button>
+                    </form>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- ==================== FOOTER ==================== -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="logo">
+                    <i class="fas fa-id-card"></i>
+                    <h1>ID_Generator</h1>
+                </div>
+                <p>Professional ID Card Solutions for Organizations</p>
+                <p>&copy; 2025 ID_Generator. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Our JS -->
+    <script src="app.js"></script>
+</body>
+
+</html>
